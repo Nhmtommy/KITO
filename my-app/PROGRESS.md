@@ -1,6 +1,6 @@
 # SHIPPER PROGRESS - Kito
 
-Start: 2026-11-26 | Day: 1/90 | Ships: 1/30
+Start: 2026-11-26 | Day: 6/90 | Ships: 2/30
 Cadence: ship every 3rd day, buffer every 5th
 Spec: MASTER_PROMPT.md v1.0.0
 Course: COURSE_BOOK.md v1.1
@@ -25,23 +25,25 @@ AI in product: NONE. Build tool only.
 - [x] PROGRESS.md committed (this file)
 
 ## CURRENT
-- Day: 6 (Ship 2 in progress)
-- Lesson: Supabase schema (6 tables) + RLS + atomic numbering function
+- Day: 6 (Ship 2 DONE)
+- Lesson: Supabase schema (6 tables) + RLS + atomic numbering function -- verified live
 - Checkpoint answered: (pending)
 - Audit question answered: (pending)
-- Ship task: Ship 2 - Supabase schema + RLS (migrations written + committed; pending Supabase run to verify)
+- Ship task: Ship 2 - Supabase schema + RLS -- DONE (6 tables + RLS enabled verified in Supabase)
 - Ship URL: https://my-app-dr91.vercel.app/
-- Last commit hash: 578d1fa
-- Blocker: Supabase project not yet created/linked (no env creds, supabase CLI not installed)
+- Last commit hash: 6a086a2
+- Blocker: none
 
 ## SHIPPED (date | URL | commit | feature)
 | # | Date | URL | Commit | Feature |
 | - | ---- | --- | ------ | ------- |
 | 1 | 2026-11-26 | https://my-app-dr91.vercel.app/ | 5896158 | Landing page (hero, how-it-works, value props, pricing, CTA) |
+| 2 | 2026-11-26 | n/a (DB) | 6a086a2 | Supabase schema (6 tables) + RLS + atomic numbering fn |
 
 ## ERRORS + FIXES
 - 2026-11-26 | Ship 1 | layout.tsx metadata find/replace corrupted file structure twice | rewrote metadata block cleanly; build verified
 - 2026-11-26 | Ship 1 | file-tool path resolution inserted "my-app" incorrectly from drive-root paths | used workspace-root-relative "my-app/..." paths
+- 2026-11-26 | Ship 2 | re-run hit "type currency_enum already exists" (partial prior run) | made RUN_ALL_ship2.sql idempotent (reset section first); re-ran clean
 
 ## AUDITS
 <!-- DATE | SHIP REF | RISK FOUND | FIXED? -->
@@ -60,12 +62,12 @@ Errors encountered: layout.tsx corruption (fixed); path resolution issues (fixed
 Blockers: none
 Next ship: Ship 2 (Day 6) - Supabase schema + RLS (tables + RLS enabled)
 
-## 2026-11-26 - Ship 2: Supabase schema + RLS -- IN PROGRESS (migrations committed)
+## 2026-11-26 - Ship 2: Supabase schema + RLS -- DONE
 URL: n/a (DB-only ship, no Vercel change)
-Commit: 578d1fa (origin/main in sync)
-Acceptance: PENDING -- 6 tables + RLS enabled + numbering function not yet run against Supabase (no project linked)
+Commit: 6a086a2 (origin/main in sync)
+Acceptance: verified in Supabase SQL Editor -- 6 tables (businesses, clients, items, documents, document_lines, activity_log) all present with relrowsecurity = true (RLS enabled)
 Files touched: supabase/migrations/0001_init_schema.sql, 0002_rls_policies.sql, 0003_next_document_number.sql, supabase/RUN_ALL_ship2.sql, supabase/README.md
 MUST constraints touched: MUST 6 (atomic numbering) -- function written, no runtime test yet (deferred to Ship 7)
-Errors encountered: none
-Blockers: Supabase project not created/linked; supabase CLI not installed
-Next step: create Supabase project -> run RUN_ALL_ship2.sql in SQL Editor -> verify tables + RLS (or install supabase CLI + `supabase db push`)
+Errors encountered: "type currency_enum already exists" on re-run (partial prior run) -- fixed by making RUN_ALL idempotent
+Blockers: none
+Next ship: Ship 3 (Day 9) - Auth (signup, login, logout) + /dashboard protected
