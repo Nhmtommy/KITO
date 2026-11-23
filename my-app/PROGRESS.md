@@ -25,14 +25,14 @@ AI in product: NONE. Build tool only.
 - [x] PROGRESS.md committed (this file)
 
 ## CURRENT
-- Day: 1 (complete)
-- Lesson: Next.js 16 App Router skeleton + deploy pipeline (scaffold already created)
+- Day: 6 (Ship 2 in progress)
+- Lesson: Supabase schema (6 tables) + RLS + atomic numbering function
 - Checkpoint answered: (pending)
 - Audit question answered: (pending)
-- Ship task: Ship 1 - Landing page + Vercel deploy (hero + CTA) -- DONE
+- Ship task: Ship 2 - Supabase schema + RLS (migrations written + committed; pending Supabase run to verify)
 - Ship URL: https://my-app-dr91.vercel.app/
-- Last commit hash: 5896158
-- Blocker: none
+- Last commit hash: 578d1fa
+- Blocker: Supabase project not yet created/linked (no env creds, supabase CLI not installed)
 
 ## SHIPPED (date | URL | commit | feature)
 | # | Date | URL | Commit | Feature |
@@ -59,3 +59,13 @@ MUST constraints touched: none (Ship 1 is marketing surface only)
 Errors encountered: layout.tsx corruption (fixed); path resolution issues (fixed)
 Blockers: none
 Next ship: Ship 2 (Day 6) - Supabase schema + RLS (tables + RLS enabled)
+
+## 2026-11-26 - Ship 2: Supabase schema + RLS -- IN PROGRESS (migrations committed)
+URL: n/a (DB-only ship, no Vercel change)
+Commit: 578d1fa (origin/main in sync)
+Acceptance: PENDING -- 6 tables + RLS enabled + numbering function not yet run against Supabase (no project linked)
+Files touched: supabase/migrations/0001_init_schema.sql, 0002_rls_policies.sql, 0003_next_document_number.sql, supabase/RUN_ALL_ship2.sql, supabase/README.md
+MUST constraints touched: MUST 6 (atomic numbering) -- function written, no runtime test yet (deferred to Ship 7)
+Errors encountered: none
+Blockers: Supabase project not created/linked; supabase CLI not installed
+Next step: create Supabase project -> run RUN_ALL_ship2.sql in SQL Editor -> verify tables + RLS (or install supabase CLI + `supabase db push`)
