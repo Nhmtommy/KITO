@@ -1,9 +1,25 @@
 -- supabase/RUN_ALL_ship2.sql
--- Kito — Ship 2 paste-and-run file.
+-- Kito — Ship 2 paste-and-run file (IDEMPOTENT).
 -- Paste this ENTIRE file into the Supabase SQL Editor and click Run.
--- It is migrations 0001 + 0002 + 0003 concatenated in order.
--- Safe to run once on a fresh project. Re-running will error on
--- "already exists" objects — that is expected and harmless.
+-- It is migrations 0000_reset + 0001 + 0002 + 0003 concatenated in order.
+-- Safe to re-run: the reset section first drops any objects from a
+-- previous or partial run, then everything is recreated cleanly.
+-- NOTE: destructive on existing tables — dev-only (no production data yet).
+
+-- ============================================================
+-- 0000_reset.sql — drop anything from a previous/partial run
+-- ============================================================
+drop function if exists next_document_number(uuid, int) cascade;
+drop function if exists owns_business(uuid) cascade;
+drop table if exists activity_log cascade;
+drop table if exists document_lines cascade;
+drop table if exists documents cascade;
+drop table if exists items cascade;
+drop table if exists clients cascade;
+drop table if exists businesses cascade;
+drop type if exists incoterm_enum cascade;
+drop type if exists doc_status cascade;
+drop type if exists currency_enum cascade;
 
 -- ============================================================
 -- 0001_init_schema.sql

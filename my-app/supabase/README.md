@@ -17,7 +17,7 @@ Database migrations for Kito.
 | `0001_init_schema.sql` | Enums + 6 tables + indexes |
 | `0002_rls_policies.sql` | RLS enabled + owner-scoped policies on every table |
 | `0003_next_document_number.sql` | Atomic `PI-{YYYY}-{NNNN}` numbering function |
-| `RUN_ALL_ship2.sql` | All three concatenated — the one you paste |
+| `RUN_ALL_ship2.sql` | Reset + all three concatenated — idempotent, re-runnable |
 
 ## Notes
 
@@ -27,3 +27,7 @@ Database migrations for Kito.
   server (Route Handler / Server Action), never from the browser.
 - These files double as history. If we later adopt the Supabase CLI,
   they run as `supabase db push` with no changes.
+- `RUN_ALL_ship2.sql` starts with a reset section (drops all Ship 2 objects
+  with `if exists`) so a partial run — e.g. hitting `type "currency_enum"
+  already exists` — is fixed by simply re-running the whole file. Destructive
+  on existing tables, so dev-only until we have real data.
