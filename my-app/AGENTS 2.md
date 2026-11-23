@@ -1,5 +1,6 @@
 # AGENTS.md — Uganda Proforma Engine
 
+Ki
 Design rule applied throughout: **the contract stays ~25 lines; context is allowed to be longer.** Short rules get followed; long rule lists become wallpaper. That's why this file is dense, not long.
 
 ---
